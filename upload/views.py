@@ -17,6 +17,11 @@ class GenerateUploadToken(View):
             print 'e: %s' % e
             return JsonResponse({'status': 'error', 'reason': str(e)})
 
+# file = request.FILES['filename']
+# file.name           # Gives name
+# file.content_type   # Gives Content type text/html etc
+# file.size           # Gives file's size in byte
+# file.read()
 
 class ChunkedUpload(View):
     def post(self, request, *args, **kwargs):
@@ -27,24 +32,14 @@ class ChunkedUpload(View):
             status = 400
         else:
             try:
-                # print 'request.FILES.keys() : %s' % request.FILES.keys()
-                # print 'request.POST.keys(): %s' % request.POST.keys()
-                # print 'request.POST.values(): %s' % request.POST.values()
-                
+                print 'request.FILES.keys() : %s' % request.FILES.keys()
+                print 'request.POST.keys(): %s' % request.POST.keys()
                 chunk = request.FILES['chunk']
-                # chunk = request.POST['chunk']
-                print 'type: %s' % type(chunk)
-
-                # file = request.FILES['filename']
-                # file.name           # Gives name
-                # file.content_type   # Gives Content type text/html etc
-                # file.size           # Gives file's size in byte
-                # file.read()
-
+                
                 print 'token: %s' % token
                 chunk_data = chunk.read()
 
-                # Create temp upload directory using token if it doesn't exist.
+                # Create temp upload directory using token if directory doesn't exist.
                 directory = os.path.join(settings.TEMP_ROOT, token)
                 if not os.path.exists(directory):
                     os.makedirs(directory)

@@ -38,7 +38,6 @@
           cancel_button.onclick = function() {
             document.getElementById('list').innerHTML = '';
             videoFile = null;
-            imageFile = null;
             $('#start_upload').addClass("disabled");
             $('#cancel_upload').addClass("disabled");
           };
@@ -55,43 +54,31 @@
                 var formData = new FormData();
                 console.log("videoFile.name = " + videoFile.name);
                 formData.append('chunk', evt.target.result, videoFile.name);
-                formData.append('token', 'ASDFQWERZXCVTYUI');
+                formData.append('token', 'ASDFQWERZXCVTYUI'); // Use a dummy token for now
 
                 $.ajax({
                     url: "{% url 'api.upload' %}",
                     data: formData,
-                    async: false,
+                    async: true,
                     cache: false,
                     processData: false,
                     contentType: false, //'multipart/form-data',
                     type: 'POST',
-                    success: function(evt){
+                    success: function(evt) {
                         console.log("SUCCESS");
                     },
                     error: function(evt) {
                         console.log("ERROR");
+                    },
+                    progress: function(evt) {
+                        console.log("PROGRESS");
                     }
                 });
-
-                // xhr.upload.onprogress = function(evt) {
-                //     if (evt.lengthComputable) {
-                //         var complete = (event.loaded / event.total * 100 | 0);
-                //         console.log("complete: " + complete);
-                //     }
-                // };
-
-                // xhr.open('POST', url);
-                // xhr.send(formData);
-
-                // var txt = ['Read bytes: ', start + 1, ' - ', stop, ' of ', videoFile.size, ' byte file'].join('');
-                // alert(txt);
               }
             };
 
-            var blob = videoFile.slice(stop, 2 * stop);
+            var blob = videoFile.slice(start, stop);
             reader.readAsArrayBuffer(blob);
-            // reader.readAsDataURL(blob);
-            // reader.readAsBinaryString(blob);
           };
 
           function handleFileSelect(evt) {
