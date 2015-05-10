@@ -7,9 +7,9 @@ TOKEN_URL = 'http://0.0.0.0:8000/api/upload/token.json'
 ITEM_URL = 'http://0.0.0.0:8000/api/item/create.json'
 
 # define the function to split the file into smaller chunks
-def sendFile(input_fn, url, token_url, chunk_size):
+def sendFile(input_filename, url, token_url, chunk_size):
 	#read the contents of the file
-	f = open(input_fn, 'rb')
+	f = open(input_filename, 'rb')
 	data = f.read() # read file contents
 	f.close()
 
@@ -28,7 +28,7 @@ def sendFile(input_fn, url, token_url, chunk_size):
 
 	for i in range(0, num_bytes + 1, chunk_size):
 		chunk = data[i : i + chunk_size]
-		files = {'chunk': (input_fn, chunk)}
+		files = {'chunk': (input_filename, chunk)}
 		r = requests.post(url, files=files, data=token_data)
 		# print '%s' % r.status_code
 		print "%s %s" % (r.status_code, r.text)
