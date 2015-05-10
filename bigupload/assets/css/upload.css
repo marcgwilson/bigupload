@@ -1,0 +1,35 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+  background-color: #ccc;
+}
+
+#drop_zone {
+  width: 600px;
+  height: 100px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-color: #aaa;
+  border-style: dashed;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+#drop_zone ul {
+  text-align: left;
+}
+
+#controls {
+  width: 600px;
+  height: 100px;
+  padding-top: 30px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+li {
+  list-style-type: none;
+}
