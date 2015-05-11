@@ -46,39 +46,32 @@
           upload_button.onclick = function() {
             var start = 0;
             var stop = 1024 * 1024;
-            var reader = new FileReader();
-            // If we use onloadend, we need to check the readyState.
-            reader.onloadend = function(evt) {
-              if (evt.target.readyState == FileReader.DONE) { // DONE == 2
-
-                var formData = new FormData();
-                console.log("videoFile.name = " + videoFile.name);
-                formData.append('chunk', evt.target.result, videoFile.name);
-                formData.append('token', 'ASDFQWERZXCVTYUI'); // Use a dummy token for now
-
-                $.ajax({
-                    url: "{% url 'api.upload' %}",
-                    data: formData,
-                    async: true,
-                    cache: false,
-                    processData: false,
-                    contentType: false, //'multipart/form-data',
-                    type: 'POST',
-                    success: function(evt) {
-                        console.log("SUCCESS");
-                    },
-                    error: function(evt) {
-                        console.log("ERROR");
-                    },
-                    progress: function(evt) {
-                        console.log("PROGRESS");
-                    }
-                });
-              }
-            };
-
             var blob = videoFile.slice(start, stop);
-            reader.readAsArrayBuffer(blob);
+            console.log("blob: " + blob);
+            var formData = new FormData();
+            console.log("videoFile.size = " + videoFile.size);
+            console.log("videoFile.name = " + videoFile.name);
+            formData.append('chunk', blob, videoFile.name);
+            formData.append('token', 'ASDFQWERZXCVTYUI'); // Use a dummy token for now
+
+            $.ajax({
+                url: "{% url 'api.upload' %}",
+                data: formData,
+                async: true,
+                cache: false,
+                processData: false,
+                contentType: false, //'multipart/form-data',
+                type: 'POST',
+                success: function(evt) {
+                    console.log("SUCCESS");
+                },
+                error: function(evt) {
+                    console.log("ERROR");
+                },
+                progress: function(evt) {
+                    console.log("PROGRESS");
+                }
+            });
           };
 
           function handleFileSelect(evt) {

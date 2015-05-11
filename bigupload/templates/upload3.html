@@ -1,0 +1,36 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+        <!-- Bootstrap core CSS -->
+        <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ STATIC_URL }}css/upload.css" rel="stylesheet">
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div id="drop_zone">
+            <div>Drop file here</div>
+            <output>
+                <ul id="list">
+                </ul>
+            </output>
+        </div>
+        <div id="controls">
+            <button id="start_upload" class="btn btn-success disabled"><span class="glyphicon glyphicon-upload"></span> Upload</button>
+            <button id="cancel_upload" class="btn btn-warning disabled"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+        </div>
+        <script src="{{ STATIC_URL }}js/jquery-1.10.2.js"></script>
+        <script src="{{ STATIC_URL }}js/upload.js"></script>
+    </body>
+</html>
